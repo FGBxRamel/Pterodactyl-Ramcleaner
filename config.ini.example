@@ -9,7 +9,7 @@ PanelUrl = https://panel.example.com
 ServerIdentifierShort = e8675cb6
 
 # At which RAM usage should the server be restarted; in MB
-MemoryTreshhold = 11000
+MemoryTreshold = 11000
 
 
 [WaitTimes]
