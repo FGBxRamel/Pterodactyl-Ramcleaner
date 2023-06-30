@@ -24,7 +24,6 @@ while True:
     if response["current_state"] == "stopped":
         wait_time = int(config["WaitTimes"]["ServerStopped"]) * 60
     else:
-        print(response)
         if response["resources"]["memory_bytes"] >= memory_treshold:
             if config.getboolean("RestartWarning", "Enabled"):
                 req.post(request_base_url + "/command", headers=headers,
