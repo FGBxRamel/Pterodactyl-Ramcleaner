@@ -1,0 +1,31 @@
+[General]
+# A client API key
+APIKey = 1234567890abcdef1234567890abcdef12345678
+
+# The URL of the panel; don't put a slash at the end!
+PanelUrl = https://panel.example.com
+
+# The server identifier in the panel; shown in the URL when in the console view
+ServerIdentifierShort = e8675cb6
+
+# At which RAM usage should the server be restarted; in MB
+MemoryTreshhold = 11000
+
+
+[WaitTimes]
+# The time to wait before the next request when server is stopped; in minutes
+ServerStopped = 5
+
+# The time to wait before the next request when server is started/running; in minutes
+ServerRunning = 1
+
+# The time to wait before the next request after the server is being restarted; in minutes
+ServerRestarting = 15
+
+
+[RestartWarning]
+# Wether or not a warning should be displayed one minute before the server is restarted
+Enabled = yes
+
+# The command to execute
+Command = say Server will be restarted in 1 minute!
