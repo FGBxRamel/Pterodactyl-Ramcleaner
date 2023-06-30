@@ -22,16 +22,17 @@ while True:
     response = req.get(request_base_url + "/resources",
                        headers=headers).json()["attributes"]
     if response["current_state"] == "stopped":
-        wait_time = int(config["General"]["ServerStopped"]) * 60
+        wait_time = int(config["WaitTimes"]["ServerStopped"]) * 60
     else:
-        if response["memory_bytes"] >= memory_treshold:
+        print(response)
+        if response["resources"]["memory_bytes"] >= memory_treshold:
             if config.getboolean("RestartWarning", "Enabled"):
                 req.post(request_base_url + "/command", headers=headers,
                          json={"command": config["RestartWarning"]["Command"]})
                 sleep(60)
             req.post(request_base_url + "/power",
                      headers=headers, json={"signal": "restart"})
-            wait_time = int(config["General"]["ServerRestarting"]) * 60
+            wait_time = int(config["WaitTimes"]["ServerRestarting"]) * 60
         else:
-            wait_time = int(config["General"]["ServerRunning"]) * 60
+            wait_time = int(config["WaitTimes"]["ServerRunning"]) * 60
     sleep(wait_time)
