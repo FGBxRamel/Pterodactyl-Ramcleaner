@@ -5,7 +5,7 @@ from urllib.parse import quote
 import requests as req
 
 config = ConfigParser()
-config.read("updater_config.ini")
+config.read("config.ini")
 
 memory_treshold = int(config["General"]["MemoryTreshold"]) * 1000000
 
