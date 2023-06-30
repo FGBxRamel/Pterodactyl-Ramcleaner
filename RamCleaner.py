@@ -1,6 +1,5 @@
 from configparser import ConfigParser
 from time import sleep
-from urllib.parse import quote
 
 import requests as req
 
@@ -20,17 +19,17 @@ headers = {
 wait_time = 60
 
 while True:
-    response = req.get(quote(request_base_url + "/resources"),
+    response = req.get(request_base_url + "/resources",
                        headers=headers).json()["attributes"]
     if response["current_state"] == "stopped":
         wait_time = int(config["General"]["ServerStopped"]) * 60
     else:
         if response["memory_bytes"] >= memory_treshold:
             if config.getboolean("RestartWarning", "Enabled"):
-                req.post(quote(request_base_url + "/command"), headers=headers,
+                req.post(request_base_url + "/command", headers=headers,
                          json={"command": config["RestartWarning"]["Command"]})
                 sleep(60)
-            req.post(quote(request_base_url + "/power"),
+            req.post(request_base_url + "/power",
                      headers=headers, json={"signal": "restart"})
             wait_time = int(config["General"]["ServerRestarting"]) * 60
         else:
